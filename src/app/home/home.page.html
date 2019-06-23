@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Pizzas
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+ 
+  <ion-list>
+ 
+    <ng-container *ngIf="!pizzas || pizzas.length == 0">
+      <div *ngFor="let n of [0,1,2]" padding>
+        <ion-skeleton-text></ion-skeleton-text>
+        <p>
+          <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
+        </p>
+      </div>
+    </ng-container>
+ 
+    <ion-item-sliding *ngFor="let item of pizzas">
+      <ion-item lines="inset" button [routerLink]="['/details', item.id]">
+        <ion-label>
+          {{ item.task }}
+          <p>{{ item.createdAt | date:'short' }}</p>
+          <ion-row>
+              <ion-col>
+                  <ion-list>
+          <p>{{ item.ingredient  }}</p>
+          </ion-list>
+</ion-col>
+</ion-row>
+        </ion-label>
+        <ion-note slot="end" color="primary">{{ item.priority }}</ion-note>
+      </ion-item>
+ 
+      <ion-item-options side="end">
+        <ion-item-option (click)="remove(item)" color="secondary">
+          Check
+          <ion-icon name="checkmark" slot="end"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+ 
+  </ion-list>
+ 
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/details" routerDirection="forward">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+ 
+</ion-content>
+<!----<ion-row>
+  <ion-col no-padding>
+<ion-img [src]="loadPizza.imageUrl"></ion-img>
+
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col>
+    <h1 text-center>{{ loadPizza.title }}</h1>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col>
+    <ion-list>
+      <ion-item *ngFor="let ig of loadPizza.ingredients">
+        {{ ig }}
+      </ion-item>
+    </ion-list>
+  </ion-col>
+</ion-row>
+</ion-grid> -->
